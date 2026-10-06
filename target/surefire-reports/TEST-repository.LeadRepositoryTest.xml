@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="config.HttpServerTest" time="0.402" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="repository.LeadRepositoryTest" time="0.219" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="20"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,10 +59,43 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="64.0"/>
   </properties>
-  <testcase name="checkStartStop" classname="config.HttpServerTest" time="0.398">
-    <system-err><![CDATA[SLF4J(W): No SLF4J providers were found.
-SLF4J(W): Defaulting to no-operation (NOP) logger implementation
-SLF4J(W): See https://www.slf4j.org/codes.html#noProviders for further details.
+  <testcase name="testSaveLead" classname="repository.LeadRepositoryTest" time="0.031">
+    <system-out><![CDATA[Hibernate: insert into leads (location,name,phoneNumber,schooling) values (?,?,?,?)
+Hibernate: select l1_0.id,l1_0.location,l1_0.name,l1_0.phoneNumber,l1_0.schooling from leads l1_0 where l1_0.id=?
+]]></system-out>
+    <system-err><![CDATA[Oct 05, 2026 2:55:22 PM org.hibernate.cache.internal.RegionFactoryInitiator initiateService
+INFO: HHH000026: Second-level cache disabled
+Oct 05, 2026 2:55:22 PM org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl configure
+WARN: HHH10001002: Using built-in connection pool (not intended for production use)
+Oct 05, 2026 2:55:22 PM org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator logConnectionInfo
+INFO: HHH10001005: Database info:
+	Database JDBC URL [jdbc:mysql://localhost:3306/ADMAGENT]
+	Database driver: com.mysql.cj.jdbc.Driver
+	Database version: 8.0.39
+	Autocommit mode: false
+	Isolation level: undefined/unknown
+	Minimum pool size: 1
+	Maximum pool size: 20
+Oct 05, 2026 2:55:22 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Oct 05, 2026 2:55:22 PM org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl getIsolatedConnection
+INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@c0004b7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 ]]></system-err>
+  </testcase>
+  <testcase name="testGetLeadById" classname="repository.LeadRepositoryTest" time="0.01">
+    <system-out><![CDATA[Hibernate: insert into leads (location,name,phoneNumber,schooling) values (?,?,?,?)
+Hibernate: select l1_0.id,l1_0.location,l1_0.name,l1_0.phoneNumber,l1_0.schooling from leads l1_0 where l1_0.id=?
+]]></system-out>
+  </testcase>
+  <testcase name="testUpdateLead" classname="repository.LeadRepositoryTest" time="0.022">
+    <system-out><![CDATA[Hibernate: insert into leads (location,name,phoneNumber,schooling) values (?,?,?,?)
+Hibernate: select l1_0.id,l1_0.location,l1_0.name,l1_0.phoneNumber,l1_0.schooling from leads l1_0 where l1_0.id=?
+Hibernate: update leads set location=?,name=?,phoneNumber=?,schooling=? where id=?
+Hibernate: select l1_0.id,l1_0.location,l1_0.name,l1_0.phoneNumber,l1_0.schooling from leads l1_0 where l1_0.id=?
+]]></system-out>
+  </testcase>
+  <testcase name="testLeadDoesNotExist" classname="repository.LeadRepositoryTest" time="0.013">
+    <system-out><![CDATA[Hibernate: select l1_0.id,l1_0.location,l1_0.name,l1_0.phoneNumber,l1_0.schooling from leads l1_0 where l1_0.id=?
+]]></system-out>
   </testcase>
 </testsuite>

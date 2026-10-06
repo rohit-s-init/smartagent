@@ -1,4 +1,3 @@
 config\HttpServerTest.class
-mcp\McpServerTest.class
 config\DatabaseConfigTest.class
 controller\LeadTest.class

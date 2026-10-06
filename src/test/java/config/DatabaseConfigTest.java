@@ -1,34 +1,36 @@
 package config;
 
 import org.hibernate.Session;
-import org.junit.jupiter.api.Test;
+import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class DatabaseConfigTest {
 
     @Test
     public void testConnection() {
 
-        DatabaseConfig db = new DatabaseConfig();
+        SessionFactory factory = DatabaseConfig.getSessionFactory();
 
         try {
-            db.start();
 
-            Assertions.assertNotNull(db.getSessionFactory());
+            Assertions.assertNotNull(factory);
+            Assertions.assertFalse(factory.isClosed());
 
-            try (Session session = db.getSessionFactory().openSession()) {
+            try (Session session = factory.openSession()) {
 
                 Integer result = session
-                    .createNativeQuery("SELECT 1", Integer.class)
-                    .getSingleResult();
+                        .createNativeQuery("SELECT 1", Integer.class)
+                        .getSingleResult();
 
                 Assertions.assertEquals(1, result);
             }
 
         } finally {
-            db.stop();
+
+            DatabaseConfig.stop();
         }
 
-        Assertions.assertTrue(db.getSessionFactory().isClosed());
+        Assertions.assertTrue(factory.isClosed());
     }
 }

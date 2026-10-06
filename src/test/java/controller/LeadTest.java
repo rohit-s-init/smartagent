@@ -16,10 +16,10 @@ public class LeadTest {
     @Test
     public void testLead() {
 
-        DatabaseConfig db = new DatabaseConfig();
-        db.start();
+        // DatabaseConfig db = new DatabaseConfig();
+        // db.start();
 
-        try (Session session = db.getSessionFactory().openSession()) {
+        try (Session session = DatabaseConfig.getSessionFactory().openSession()) {
 
             Transaction tx = session.beginTransaction();
 
@@ -57,7 +57,7 @@ public class LeadTest {
             }
 
         } finally {
-            db.stop();
+            DatabaseConfig.stop();
         }
     }
 }
