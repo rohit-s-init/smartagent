@@ -1,0 +1,46 @@
+package dto;
+
+import java.time.LocalDateTime;
+
+import model.Note;
+
+public class NoteDTO {
+
+    private Long id;
+    private String content;
+    private LocalDateTime createdAt;
+
+    public NoteDTO() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public NoteDTO(Note note ){
+        if(note == null) return;
+        this.id = note.getId();
+        this.content = note.getContent();
+        this.createdAt = note.getCreatedAt();
+    }
+}

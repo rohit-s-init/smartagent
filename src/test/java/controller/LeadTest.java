@@ -1,15 +1,14 @@
 package controller;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Test;
+
 import config.DatabaseConfig;
 import model.Exam;
 import model.Grade;
 import model.Lead;
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class LeadTest {
 
@@ -18,10 +17,11 @@ public class LeadTest {
 
         // DatabaseConfig db = new DatabaseConfig();
         // db.start();
+        Session session = DatabaseConfig.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
 
-        try (Session session = DatabaseConfig.getSessionFactory().openSession()) {
+        try{
 
-            Transaction tx = session.beginTransaction();
 
             try {
                 Lead lead = new Lead();
@@ -57,6 +57,7 @@ public class LeadTest {
             }
 
         } finally {
+            tx.rollback();
             DatabaseConfig.stop();
         }
     }

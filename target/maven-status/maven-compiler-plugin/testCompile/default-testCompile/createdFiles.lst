@@ -1,3 +1,9 @@
 config\HttpServerTest.class
+repository\FeedbackRepoTest.class
+repository\ExamRepositoryTest.class
+repository\NoteRepositoryTest.class
+repository\LeadRepositoryTest.class
+repository\ResourceRepositoryTest.class
 config\DatabaseConfigTest.class
+repository\ScheduleRepositoryTest.class
 controller\LeadTest.class

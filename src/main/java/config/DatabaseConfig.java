@@ -7,8 +7,12 @@ import org.hibernate.cfg.Configuration;
 
 import model.Chat;
 import model.Exam;
+import model.Feedback;
 import model.Grade;
 import model.Lead;
+import model.Note;
+import model.Resource;
+import model.Schedule;
 
 public class DatabaseConfig {
 
@@ -24,6 +28,10 @@ public class DatabaseConfig {
             config.addAnnotatedClass(Exam.class);
             config.addAnnotatedClass(Grade.class);
             config.addAnnotatedClass(Chat.class);
+            config.addAnnotatedClass(Feedback.class);
+            config.addAnnotatedClass(Note.class);
+            config.addAnnotatedClass(Resource.class);
+            config.addAnnotatedClass(Schedule.class);
             // config.addAnnotatedClass(Lead.class);
 
             factory = config.buildSessionFactory();
