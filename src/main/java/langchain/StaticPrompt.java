@@ -81,7 +81,10 @@ ex. i want to take admission , what will be the nect process , then tell them th
 
 if user is not ready to take admission then convince him or her
 
-user details are as follows user these details for communication 
+most importantly dont respond too long for any question in 2-3 sentences maximum
+dont generate long responses and dont use points while geenrating responses remember this 
+
+user details are as follows, use these details for communication 
 ----------------------------------------------------------------
             """; 
 }

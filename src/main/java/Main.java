@@ -22,20 +22,22 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
 
-        LeadDTO lead = new LeadRepository().getLeadByPhoneNumber("1234567890");
+        LeadDTO lead = new LeadRepository().getLeadByPhoneNumber("1234567896");
 
-        String str1 = agent.dynamicPromptProvider(lead.getId());
-        System.out.println(str1);
+        // String str1 = agent.dynamicPromptProvider(lead.getId());
+        // System.out.println(str1);
 
         StringBuilder str;
         while ((str = new StringBuilder(sc.nextLine())) != null) {
             System.out.println(agent.chat(lead.getId(), str.toString()));
         }
 
-        // Twillio.makeCall("8459781390");
 
-        // var url = Ngrok.forwardPort();
-        // System.out.println(url);
+        var url = Ngrok.forwardPort();
+        System.out.println(url);
+
+        // Twillio.makeCall("8459781390","https://twiddle-dictate-plunging.ngrok-free.dev/twillio/webhook");
+
 
         // Twillio.makeCall("8459781390", url+"/twillio/webhook");
 
