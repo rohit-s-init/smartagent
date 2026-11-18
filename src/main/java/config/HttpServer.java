@@ -1,5 +1,6 @@
 package config;
 
+import java.net.InetSocketAddress;
 
 import org.eclipse.jetty.ee10.servlet.ServletContextHandler;
 import org.eclipse.jetty.server.Server;
@@ -22,7 +23,18 @@ import controller.twillio.TwillioWebhookServlet;
 public class HttpServer {
     protected Server server = new Server(8081);
 
-    public void start() throws Exception{
+    public HttpServer() {
+        String portEnv = System.getenv("PORT");
+
+        int port = portEnv != null
+                ? Integer.parseInt(portEnv)
+                : 8081;
+
+        server = new Server(
+                new InetSocketAddress("0.0.0.0", port));
+    }
+
+    public void start() throws Exception {
 
         ServletContextHandler homeContext = new ServletContextHandler("/public");
         homeContext.addServlet(HomeController.class, "/");
@@ -45,7 +57,6 @@ public class HttpServer {
         crmContext.addServlet(ScheduleServlet.class, "/schedules");
         crmContext.addServlet(ResourceServlet.class, "/resources/*");
 
-
         ContextHandlerCollection contextHandlers = new ContextHandlerCollection();
         contextHandlers.addHandler(homeContext);
         contextHandlers.addHandler(twillioContext);
@@ -57,9 +68,8 @@ public class HttpServer {
 
     }
 
-    public void stop() throws Throwable{
+    public void stop() throws Throwable {
         server.stop();
     }
-    
 
 }

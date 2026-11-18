@@ -1,6 +1,7 @@
 controller\HomeController.class
 model\Schedule.class
 service\Ngrok.class
+dto\GradeDTO.class
 dto\ScheduleDAO.class
 model\Exam.class
 dto\LeadDTO.class
@@ -12,6 +13,7 @@ controller\crm\FeedbackServlet.class
 langchain\Agent$1.class
 repository\ResourceRepository.class
 repository\NoteRepository.class
+dto\ChatDTO.class
 controller\crm\ScheduleServlet.class
 model\Grade.class
 controller\crm\CrmServlet$Page.class
@@ -23,6 +25,7 @@ controller\crm\ExamServlet.class
 dto\FeedbackDTO.class
 controller\crm\ChatServlet.class
 controller\twillio\TwillioWebhookServlet.class
+repository\ChatRepository$1.class
 repository\ChatRepository.class
 controller\crm\NoteServlet.class
 repository\ExamRepository.class
@@ -33,6 +36,7 @@ controller\crm\GradeServlet.class
 repository\LeadRepository.class
 Main.class
 controller\crm\LeadServlet.class
+repository\GradeRepository.class
 controller\crm\CrmException.class
 langchain\Agent$2.class
 config\DatabaseConfig.class

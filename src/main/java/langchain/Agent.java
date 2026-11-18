@@ -24,7 +24,9 @@ public class Agent {
     public static final String SYSTEM_PROMPT = StaticPrompt.PROMPT;
 
     private OpenAiChatModel model;
+    private OpenAiChatModel fallbackMode1;
     private Assistant assistant;
+    private Assistant fallbackAssistant;
 
     public Agent() {
 
@@ -38,10 +40,26 @@ public class Agent {
                 .parallelToolCalls(true)
                 .build();
 
+        fallbackMode1 = OpenAiChatModel.builder()
+                .baseUrl("https://api.groq.com/openai/v1")
+                .apiKey(dotenv.get("GROQ_API_TWO"))
+                .modelName("openai/gpt-oss-120b")
+                .reasoningEffort("medium")
+                .parallelToolCalls(true)
+                .build();
+
         assistant = AiServices.builder(Assistant.class)
                 .systemMessageProvider((leadId) -> SYSTEM_PROMPT + "\nthe user details are as follows: \n\n"
                         + dynamicPromptProvider((Long) leadId))
                 .chatModel(model)
+                .tools(new Tools())
+                .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(25))
+                .build();
+
+        fallbackAssistant = AiServices.builder(Assistant.class)
+                .systemMessageProvider((leadId) -> SYSTEM_PROMPT + "\nthe user details are as follows: \n\n"
+                        + dynamicPromptProvider((Long) leadId))
+                .chatModel(fallbackMode1)
                 .tools(new Tools())
                 .chatMemoryProvider(memoryId -> MessageWindowChatMemory.withMaxMessages(25))
                 .build();
@@ -53,7 +71,21 @@ public class Agent {
         saveSafely(leadId, "user", message);
 
         InvocationParameters invocationParameters = InvocationParameters.from("leadId", leadId);
-        String reply = assistant.chat(leadId, message, invocationParameters);
+        String reply = null;
+
+        try {
+            reply = assistant.chat(leadId, message, invocationParameters);
+        } catch (Exception e) {
+            System.out.println("Primary API rate limited. Using fallback.");
+
+            try {
+                reply = fallbackAssistant.chat(leadId, message, invocationParameters);
+            } catch (Exception e2) {
+                System.err.println("Fallback failed: " + e2.getMessage());
+                reply = "I'm having a temporary technical issue. Please try again shortly.";
+                reply = "this is a default response .";
+            }
+        }
 
         saveSafely(leadId, "assistant", reply);
         return reply;
