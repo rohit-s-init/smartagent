@@ -18,6 +18,7 @@ import controller.crm.LeadServlet;
 import controller.crm.NoteServlet;
 import controller.crm.ResourceServlet;
 import controller.crm.ScheduleServlet;
+import controller.twillio.MakeCallServlet;
 import controller.twillio.TwillioWebhookServlet;
 
 public class HttpServer {
@@ -38,6 +39,7 @@ public class HttpServer {
 
         ServletContextHandler homeContext = new ServletContextHandler("/public");
         homeContext.addServlet(HomeController.class, "/");
+        homeContext.addServlet(MakeCallServlet.class, "/makecall");
 
         ServletContextHandler twillioContext = new ServletContextHandler("/twillio");
         twillioContext.addServlet(TwillioWebhookServlet.class, "/webhook");

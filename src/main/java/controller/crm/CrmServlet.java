@@ -33,6 +33,8 @@ public abstract class CrmServlet extends HttpServlet {
         resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
         resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        resp.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, ngrok-skip-browser-warning");
+
 
         String method = req.getMethod();
 

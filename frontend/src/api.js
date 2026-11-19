@@ -16,7 +16,10 @@ export async function crmGet(path, params = {}, signal) {
 
   let response;
   try {
-    response = await fetch(`${API_BASE}${path}${query ? `?${query}` : ""}`, { signal });
+    response = await fetch(`${API_BASE}${path}${query ? `?${query}` : ""}`, {
+      signal,
+      headers: { "ngrok-skip-browser-warning": "true" },
+    });
   } catch (error) {
     if (error.name === "AbortError") throw error;
     // status 0 = the server could not be reached at all

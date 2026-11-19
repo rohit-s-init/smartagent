@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "https://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="hibernate.connection.driver_class">
+            com.mysql.cj.jdbc.Driver
+        </property>
+
+        <property name="hibernate.connection.url">
+            jdbc:mysql://FdZetu2SkS6s4DW.root:Ot4wJk1kyaDPg7Zf@gateway01.ap-northeast-1.prod.aws.tidbcloud.com:4000/ADMINOVA?sslMode=VERIFY_IDENTITY
+        </property>
+
+        <property name="hibernate.connection.username">
+            FdZetu2SkS6s4DW.root
+        </property>
+
+        <property name="hibernate.connection.password">
+            Ot4wJk1kyaDPg7Zf
+        </property>
+
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+
+    </session-factory>
+</hibernate-configuration>

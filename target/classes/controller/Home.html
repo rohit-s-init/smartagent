@@ -1,1 +1,114 @@
-Hello Home
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartAgent - Make Call</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f4f6f9;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #0002;
+            width: 320px;
+            text-align: center;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            box-sizing: border-box;
+            border-radius: 6px;
+        }
+
+        input {
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #status {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>SmartAgent Call</h2>
+    <p>Enter a phone number to initiate a call.</p>
+
+    <form id="callForm">
+        <input
+            type="tel"
+            id="phone"
+            placeholder="+919876543210"
+            required
+        >
+        <button id="callButton" type="submit">
+            Make Call
+        </button>
+    </form>
+
+    <p id="status"></p>
+</div>
+
+<script>
+    const form = document.getElementById("callForm");
+    const button = document.getElementById("callButton");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const phone = document.getElementById("phone").value.trim();
+
+        button.disabled = true;
+        status.textContent = "Initiating call...";
+
+        try {
+            const response = await fetch("/public/makecall", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: new URLSearchParams({ phone })
+            });
+
+            if (!response.ok) {
+                throw new Error("HTTP " + response.status);
+            }
+
+            status.textContent = "Call request submitted!";
+        } catch (error) {
+            status.textContent = "Error: " + error.message;
+        } finally {
+            button.disabled = false;
+        }
+    });
+</script>
+
+</body>
+</html>

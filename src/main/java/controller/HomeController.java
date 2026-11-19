@@ -14,7 +14,7 @@ public class HomeController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader("E:\\java_project_caller\\src\\main\\java\\controller\\Home.html"));
+        BufferedReader br = new BufferedReader(new FileReader("E:\\smartagent (1)\\smartagent\\src\\main\\java\\controller\\Home.html"));
         StringBuilder sb = new StringBuilder();
         String ins;
         while((ins = br.readLine()) != null){
