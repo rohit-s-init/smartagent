@@ -27,10 +27,10 @@ public class Main {
         // String str1 = agent.dynamicPromptProvider(lead.getId());
         // System.out.println(str1);
 
-        StringBuilder str;
-        while ((str = new StringBuilder(sc.nextLine())) != null) {
-            System.out.println(agent.chat(lead.getId(), str.toString()));
-        }
+        // StringBuilder str;
+        // while ((str = new StringBuilder(sc.nextLine())) != null) {
+        //     System.out.println(agent.chat(lead.getId(), str.toString()));
+        // }
 
 
         var url = Ngrok.forwardPort();
